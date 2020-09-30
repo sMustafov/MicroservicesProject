@@ -13,7 +13,7 @@
     using System.Threading.Tasks;
 
     [Produces("application/json")]
-    [Route("v1/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
     {
