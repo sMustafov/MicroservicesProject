@@ -38,7 +38,7 @@
                 HostName = this.hostname,
                 UserName = this.username,
                 Password = this.password
-        };
+            };
 
             this.connection = factory.CreateConnection();
             this.connection.ConnectionShutdown += RabbitMQ_ConnectionShutdown;
