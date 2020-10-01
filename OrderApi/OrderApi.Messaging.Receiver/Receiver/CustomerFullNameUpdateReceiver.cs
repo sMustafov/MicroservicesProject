@@ -40,15 +40,17 @@
                 Password = this.password
             };
 
-            this.connection = factory.CreateConnection();
+            using (var connection = factory.CreateConnection())
             this.connection.ConnectionShutdown += RabbitMQ_ConnectionShutdown;
-            this.channel = this.connection.CreateModel();
-            this.channel.QueueDeclare(
-                queue: this.queueName, 
-                durable: false, 
-                exclusive: false, 
-                autoDelete: false, 
-                arguments: null);
+            using (this.channel = connection.CreateModel())
+            {
+                this.channel.QueueDeclare(
+                   queue: this.queueName,
+                   durable: false,
+                   exclusive: false,
+                   autoDelete: false,
+                   arguments: null);
+            }           
         }
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
